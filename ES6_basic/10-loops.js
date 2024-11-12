@@ -1,5 +1,7 @@
+// 10-loops.js
+
 export default function appendToEachArrayValue(array, appendString) {
-	for (let [idx, value] of array.entries()) {
+	for (const [idx, value] of array.entries()) {
 	  array[idx] = appendString + value;
 	}
   
