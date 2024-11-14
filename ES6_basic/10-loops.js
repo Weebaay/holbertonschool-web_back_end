@@ -1,9 +1,9 @@
-// 10-loops.js
+// 10-loops
 
 export default function appendToEachArrayValue(array, appendString) {
-	for (const [idx, value] of array.entries()) {
-	  array[idx] = appendString + value;
-	}
+    for (const [idx, value] of array.entries()) {
+      array[idx] = appendString + value;
+    }
   
-	return array;
+    return array;
 }
