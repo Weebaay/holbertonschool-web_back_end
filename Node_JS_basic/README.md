@@ -121,10 +121,19 @@ Each task can be executed separately. For example:
 ## Tools Used
 
 **Node.js:** JavaScript runtime for building server-side applications.
-**Express.js:** Web framework for creating robust APIs and web servers.
+
+
+**Express.js:** Web framework for creating robust APIs and web servers
+.
+
 **ESLint:** Tool for identifying and fixing coding style issues.
+
+
 **Babel:** JavaScript compiler for using modern ES6+ syntax.
+
+
 **Nodemon:** Utility for restarting the server automatically during development.
+
 
 ## Author
 
