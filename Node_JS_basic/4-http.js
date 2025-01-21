@@ -1,12 +1,11 @@
-const { appendFile } = require('fs');
 const http = require('http');
 
-const server = http.createServer((req, res) => {
-  res.setHeader('Content-Type', 'text/plain');
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' }); // Ajout d'un header Content-Type
   res.write('Hello Holberton School!');
   res.end();
 });
 
-server.listen(1245);
+app.listen(1245);
 
 module.exports = app;
