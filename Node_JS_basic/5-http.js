@@ -9,7 +9,7 @@ const app = http.createServer((req, res) => {
     countStudents(process.argv[2]) // Le fichier est passé en argument
       .then((result) => {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end(`This is the list of our students\n${result}`);
+        res.end('This is the list of our students\n');
       })
       .catch(() => {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
