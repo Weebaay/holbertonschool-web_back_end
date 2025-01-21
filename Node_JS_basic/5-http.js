@@ -2,25 +2,35 @@ const http = require('http');
 const countStudents = require('./3-read_file_async');
 
 const server = http.createServer((req, res) => {
+  res.setHeaders('Content-Type', 'text/plain');
   if (req.url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
+    res.writeHead(200);
+    res.end('Hello Holberton School!');
     return;
   }
   if (req.url === '/students') {
-    res.write('This is the list of our students');
-    countStudents('database.csv')
-      .then(() => {
-        res.end();
+    res.writeHead(200);
+    res.write('This is the list of our students\n');
+
+    const databaseFile = process.argv[2]; // Récupérer le nom du fichier depuis les arguments
+
+    if (!databaseFile) {
+      res.end('Cannot load the database'); // Gérer le cas où aucun fichier n'est fourni
+      return;
+    }
+
+    countStudents(databaseFile)
+      .then((studentData) => {
+        res.end(studentData);
       })
-      .catch((error) => {
-        res.write(error.message);
-        res.end();
+      .catch(() => {
+        res.end('Cannot load the database');
       });
     return;
   }
-  res.write('404 Not Found');
-  res.end();
+
+  res.writeHead(404);
+  res.end('Not Found');
 });
 
 server.listen(1245);
