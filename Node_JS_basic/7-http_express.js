@@ -1,5 +1,6 @@
 const express = require('express');
 const countStudents = require('./3-read_file_async');
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -9,9 +10,10 @@ app.get('/', (req, res) => {
 app.get('/students', (req, res) => {
   let output = 'This is the list of our students\n';
 
-  countStudents(process.argv[2]) // Le nom du fichier est passé en argument
-    .then(() => {
-      res.send(output.trim());
+  countStudents(process.argv[2])
+    .then((result) => {
+      output += result; // Ajoute les résultats retournés par countStudents
+      res.send(output.trim()); // Envoie la réponse
     })
     .catch(() => {
       res.status(500).send('Cannot load the database');

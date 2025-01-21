@@ -6,10 +6,11 @@ const app = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
-    countStudents(process.argv[2]) // Le fichier est passé en argument
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write('This is the list of our students\n');
+    countStudents(process.argv[2])
       .then((result) => {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('This is the list of our students\n');
+        res.end(result); // Envoie le résultat retourné par countStudents
       })
       .catch(() => {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
