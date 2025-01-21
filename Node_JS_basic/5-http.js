@@ -1,38 +1,26 @@
 const http = require('http');
 const countStudents = require('./3-read_file_async');
 
-const server = http.createServer((req, res) => {
-  res.setHeaders('Content-Type', 'text/plain');
+const app = http.createServer((req, res) => {
   if (req.url === '/') {
-    res.writeHead(200);
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello Holberton School!');
-    return;
-  }
-  if (req.url === '/students') {
-    res.writeHead(200);
-    res.write('This is the list of our students\n');
-
-    const databaseFile = process.argv[2]; // Récupérer le nom du fichier depuis les arguments
-
-    if (!databaseFile) {
-      res.end('Cannot load the database'); // Gérer le cas où aucun fichier n'est fourni
-      return;
-    }
-
-    countStudents(databaseFile)
-      .then((studentData) => {
-        res.end(studentData);
+  } else if (req.url === '/students') {
+    countStudents(process.argv[2]) // Le fichier est passé en argument
+      .then((result) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end(`This is the list of our students\n${result}`);
       })
       .catch(() => {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Cannot load the database');
       });
-    return;
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('404 Not Found');
   }
-
-  res.writeHead(404);
-  res.end('Not Found');
 });
 
-server.listen(1245);
+app.listen(1245);
 
-module.exports = server;
+module.exports = app;
