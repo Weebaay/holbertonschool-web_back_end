@@ -1,4 +1,4 @@
-const readDatabase = require('../utils/utils');
+const readDatabase = require('../utils');
 
 class StudentsController {
   static async getAllStudents(req, res) {
@@ -6,7 +6,6 @@ class StudentsController {
       const students = await readDatabase(process.argv[2]);
       let output = 'This is the list of our students\n';
 
-      // Trier les champs par ordre alphabétique
       const sortedFields = Object.keys(students).sort();
       for (const field of sortedFields) {
         const studentList = students[field];
